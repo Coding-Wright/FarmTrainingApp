@@ -30,7 +30,19 @@ namespace FarmProject.Farms.SimpleFarm
 
         public List<string> GetAnimalDetails()
         {
-            throw new NotImplementedException();
+            var infoList = new List<string>();
+
+            for(var i = 0; i < CurrentAnimalIndex; i++)
+            {
+                var animalInfo = "";
+                animalInfo = animalInfo + AgesOfAnimals[i];
+
+                animalInfo = animalInfo + " " + NameOfAnimals[i];
+
+                infoList.Add(animalInfo);               
+            }
+
+            return infoList;            
         }
 
 
