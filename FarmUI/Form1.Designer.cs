@@ -34,6 +34,8 @@
             AddCatBtn = new Button();
             AddHorseButton = new Button();
             FarmVersionLbl = new Label();
+            farmSelector = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)farmSelector).BeginInit();
             SuspendLayout();
             // 
             // AnimalDetailsList
@@ -88,17 +90,27 @@
             // FarmVersionLbl
             // 
             FarmVersionLbl.AutoSize = true;
-            FarmVersionLbl.Location = new Point(12, 22);
+            FarmVersionLbl.Location = new Point(12, 54);
             FarmVersionLbl.Name = "FarmVersionLbl";
             FarmVersionLbl.Size = new Size(70, 15);
             FarmVersionLbl.TabIndex = 5;
             FarmVersionLbl.Text = "Using Farm:";
+            // 
+            // farmSelector
+            // 
+            farmSelector.Location = new Point(12, 28);
+            farmSelector.Name = "farmSelector";
+            farmSelector.Size = new Size(70, 23);
+            farmSelector.TabIndex = 6;
+            farmSelector.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            farmSelector.ValueChanged += farmSelector_ValueChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(farmSelector);
             Controls.Add(FarmVersionLbl);
             Controls.Add(AddHorseButton);
             Controls.Add(AddCatBtn);
@@ -107,6 +119,7 @@
             Controls.Add(AnimalDetailsList);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)farmSelector).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -119,5 +132,6 @@
         private Button AddCatBtn;
         private Button AddHorseButton;
         private Label FarmVersionLbl;
+        private NumericUpDown farmSelector;
     }
 }

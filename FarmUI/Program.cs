@@ -10,6 +10,7 @@ namespace FarmProject.FarmUI
 {
     internal static class Program
     {
+        private static ServiceCollection _services = new ServiceCollection();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -17,25 +18,54 @@ namespace FarmProject.FarmUI
         static void Main()
         {
             NameValueCollection appSettings = ConfigurationManager.AppSettings;
-            var services = new ServiceCollection();
 
             var farmVersion = ConfigurationManager.AppSettings["FarmVersion"];
 
-            if (farmVersion == null || farmVersion.Trim().ToLower() == "1")
+            var farmVersionValue = 1m;
+            if(decimal.TryParse(farmVersion, out farmVersionValue))
             {
-                services.AddSingleton(typeof(IFarm), new MyDummyFarm());
-                Form1.FarmVersion = "Dummy Farm";
-            } 
-            else if(farmVersion.Trim().ToLower() == "2")
-            {
-                services.AddSingleton(typeof(IFarm), new MySimpleFarm());
-                Form1.FarmVersion = "Simple Farm";
+                _services.AddSingleton(typeof(IFarm), GetFarm(farmVersionValue));
+                Form1.FarmVersion = GetFarmName(farmVersionValue);
             }
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1(services));
+            Application.Run(new Form1(_services));
+        }
+
+        public static void ChangeFarm(decimal farmVersion)
+        {
+            _services.AddSingleton(typeof(IFarm), GetFarm(farmVersion));
+            Form1.FarmVersion = GetFarmName(farmVersion);
+        }
+
+        private static IFarm GetFarm(decimal farmVersion)
+        {
+            if (farmVersion == 1m)
+            {
+                return new MyDummyFarm();
+            }
+            else if(farmVersion == 2m)
+            {
+                return new MySimpleFarm();
+            }
+
+            return new MyDummyFarm();
+        }
+
+        private static string GetFarmName(decimal farmVersion)
+        {
+            if (farmVersion == 1m)
+            {
+                return "Dummy Farm";
+            }
+            else if (farmVersion == 2m)
+            {
+                return "Simple Farm";
+            }
+
+            return "Dummy Farm";
         }
     }
 }
