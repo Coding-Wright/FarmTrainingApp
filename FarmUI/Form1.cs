@@ -46,7 +46,7 @@ namespace FarmProject.FarmUI
 
         private void AddHorseButton_Click(object sender, EventArgs e)
         {
-
+            _farm.AddAnimal(AnimalType.Horse);
         }
 
         private void farmSelector_ValueChanged(object sender, EventArgs e)
