@@ -102,7 +102,7 @@
             farmSelector.Name = "farmSelector";
             farmSelector.Size = new Size(70, 23);
             farmSelector.TabIndex = 6;
-            farmSelector.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            farmSelector.Value = new decimal(new int[] { 2, 0, 0, 0 });
             farmSelector.ValueChanged += farmSelector_ValueChanged;
             // 
             // Form1
